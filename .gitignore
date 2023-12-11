@@ -1,0 +1,9 @@
+# vim
+*~
+*swp
+
+# inputs
+/inputs/
+
+# outputs
+/outputs/
