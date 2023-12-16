@@ -10,6 +10,7 @@ damm = CSV.File("inputs/DAMM.csv") |> DataFrame
 
 df_DateTime = DateTime.(df.Date, "mm/dd/yyyy H:MM")
 dateticks = optimize_ticks(df_DateTime[1], df_DateTime[end])[1]
+dateticks = dateticks[collect(1:2:end)] # only keep every third
 
 fontsize_theme = Theme(fontsize = 50)
 set_theme!(fontsize_theme)
@@ -30,8 +31,8 @@ p_SWC5 = lines!(ax_H2O, datetime2unix.(df_DateTime), df.SWC_d, color = "#FFBE0B"
 p_SWC35 = lines!(ax_H2O, datetime2unix.(df_DateTime), df.SWC35_d, color = "#FB5607", linewidth = 4)
 p_rain = barplot!(ax_H2O_rain, datetime2unix.(df_DateTime), df.Prep, color = :blue)
 
-p_Rsoil = lines!(ax_R, datetime2unix.(df_DateTime), df.Rsoil_DAMM_d, color = "#FFBE0B", linewidth = 4)
-p_Rhetero = lines!(ax_R, datetime2unix.(df_DateTime), df."Rh.model", color = "#FB5607", linewidth = 4)
+p_Rsoil = lines!(ax_R, datetime2unix.(df_DateTime), df.Rsoil_li_obs_d, color = "#FFBE0B", linewidth = 4)
+p_Rhetero = lines!(ax_R, datetime2unix.(df_DateTime), df.Rm_d, color = "#FB5607", linewidth = 4)
 p_Rroot = lines!(ax_R, datetime2unix.(df_DateTime), df.Rr_d, color = "#FF006E", linewidth = 4)
 p_Rstem = lines!(ax_R, datetime2unix.(df_DateTime), df."Rstem.d", color = "#8338EC", linewidth = 4)
 p_Reco = lines!(ax_R, datetime2unix.(df_DateTime), df.Re_d_SOLO, color = "#3A86FF", linewidth = 4)
